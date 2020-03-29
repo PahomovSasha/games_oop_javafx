@@ -39,12 +39,12 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell ... cells) {
+    public boolean isFree(Cell... cells) {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -70,8 +70,50 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
-        boolean result = false;
+        boolean result = isWinVertical(table) || isWinHorizontal(table);
         return result;
+    }
+
+    private boolean isWinVertical(int[][] table) {
+        int tempVertical = 0;
+        int countVertical = 0;
+        boolean resultVerticalWin = false;
+        for (int i = 0; i < size; i++) {
+            if (table[0][i] == 1) {
+                tempVertical = i;
+                break;
+            }
+        }
+        for (int i = 0; i < table.length; i++) {
+            if (table[i][tempVertical] == 1) {
+                countVertical++;
+            }
+        }
+        if (countVertical == size) {
+            resultVerticalWin = true;
+        }
+        return resultVerticalWin;
+    }
+
+    private boolean isWinHorizontal(int[][] table) {
+        int tempHorizontal = 0;
+        int countHorizontal = 0;
+        boolean resultHorizontalWin = false;
+        for (int i = 0; i < size; i++) {
+            if (table[i][0] == 1) {
+                tempHorizontal = i;
+                break;
+            }
+        }
+        for (int i = 0; i < table.length; i++) {
+            if (table[tempHorizontal][i] == 1) {
+                countHorizontal++;
+            }
+        }
+        if (countHorizontal == size) {
+            resultHorizontalWin = true;
+        }
+        return resultHorizontalWin;
     }
 
     public int[][] convert() {
