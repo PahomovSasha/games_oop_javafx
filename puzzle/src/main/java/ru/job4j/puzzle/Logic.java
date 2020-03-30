@@ -70,7 +70,15 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
-        boolean result = isWinVertical(table) || isWinHorizontal(table);
+        boolean result = false;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i][i] == 1) {
+                if (isWinVertical(table) || isWinHorizontal(table)) {
+                    result = true;
+                    break;
+                }
+            }
+        }
         return result;
     }
 
