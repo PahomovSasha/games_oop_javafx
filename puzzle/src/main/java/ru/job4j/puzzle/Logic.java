@@ -73,7 +73,7 @@ public class Logic {
         boolean result = false;
         for (int i = 0; i < table.length; i++) {
             if (table[i][i] == 1) {
-                if (isWinVertical(table) || isWinHorizontal(table)) {
+                if (isWinVertical(table, i) || isWinHorizontal(table, i)) {
                     result = true;
                     break;
                 }
@@ -82,44 +82,24 @@ public class Logic {
         return result;
     }
 
-    private boolean isWinVertical(int[][] table) {
-        int tempVertical = 0;
-        int countVertical = 0;
-        boolean resultVerticalWin = false;
-        for (int i = 0; i < size; i++) {
-            if (table[0][i] == 1) {
-                tempVertical = i;
+    private boolean isWinVertical(int[][] table, int column) {
+        boolean resultVerticalWin = true;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i][column] != 1) {
+                resultVerticalWin = false;
                 break;
             }
-        }
-        for (int i = 0; i < table.length; i++) {
-            if (table[i][tempVertical] == 1) {
-                countVertical++;
-            }
-        }
-        if (countVertical == size) {
-            resultVerticalWin = true;
         }
         return resultVerticalWin;
     }
 
-    private boolean isWinHorizontal(int[][] table) {
-        int tempHorizontal = 0;
-        int countHorizontal = 0;
-        boolean resultHorizontalWin = false;
-        for (int i = 0; i < size; i++) {
-            if (table[i][0] == 1) {
-                tempHorizontal = i;
+    private boolean isWinHorizontal(int[][] table, int row) {
+        boolean resultHorizontalWin = true;
+        for (int i = 0; i < table.length; i++) {
+            if (table[row][i] != 1) {
+                resultHorizontalWin = false;
                 break;
             }
-        }
-        for (int i = 0; i < table.length; i++) {
-            if (table[tempHorizontal][i] == 1) {
-                countHorizontal++;
-            }
-        }
-        if (countHorizontal == size) {
-            resultHorizontalWin = true;
         }
         return resultHorizontalWin;
     }
