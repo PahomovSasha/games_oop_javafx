@@ -28,12 +28,8 @@ public class Logic {
         if (index != -1) {
             try {
                 Cell[] steps = this.figures[index].way(source, dest);
-                for (Cell step : steps) {
-                    for (int i = 0; i < this.figures.length; i++) {
-                        if (step.equals(this.figures[i].position())) {
-                            return false;
-                        }
-                    }
+                if (!freeWay(steps)) {
+                    return false;
                 }
                 if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                     rst = true;
@@ -41,6 +37,17 @@ public class Logic {
                 }
             } catch (IllegalStateException e) {
                 return false;
+            }
+        }
+        return rst;
+    }
+
+    public boolean freeWay(Cell[] steps) {
+        boolean rst = true;
+        for (Cell step : steps) {
+            if (findBy(step) != -1){
+                rst = false;
+                break;
             }
         }
         return rst;

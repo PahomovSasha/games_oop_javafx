@@ -15,7 +15,7 @@ public class LogicTest {
     public void moveFalse() {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
-        logic.add(new KingBlack(Cell.D2));
+        logic.add(new KingBlack(Cell.E3));
         boolean rsl = logic.move(Cell.C1, Cell.H6);
         assertThat(rsl, is(false));
     }
